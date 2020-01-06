@@ -4,13 +4,13 @@ pipeline {
       stage(‘Lint HTML’) {
         steps {
           sh ‘tidy -q -e *.html’
-        }
+      }
       stage(‘Upload to AWS’) {
         steps {
           withAWS(region:’us-east-2’,credentials:’blueocean’) {
-            s3Upload(pathStyleAccessEnabled:true, payloadSigningEnabled: true, file:’index2.html’, bucket:’static-jenkins-pipeline-romero’)
+            s3Upload(pathStyleAccessEnabled: true, payloadSigningEnabled: true, file:’index.html’, bucket:’static-jenkins-pipeline-romero’)
           }
         }
       }
     }
-}
+  }
